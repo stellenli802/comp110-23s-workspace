@@ -11,11 +11,14 @@ print(220 >= int(("1" + "1" + "0") * 2)) #false bcuz 220 !>= 110110
 print(220 >= int("1" + "1" + "0") * 2)
 
 #traffic light conditional:
-light: str = input("What color is the light? ")
+light: str = input("What color is the light? ").lower() #.lower() makes it not case sensitive
+
 if (light == "green"):
     print("GO")
     print("Drive safe! Love, mom.")
 elif (light == "yellow"):
     print("vroom")
-else:
+elif (light == "red"):
     print("STOP")
+else:
+    print("Go report this to the authorities.")
