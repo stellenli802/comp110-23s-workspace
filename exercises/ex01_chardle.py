@@ -2,7 +2,7 @@
 
 __author__ = "730476572"
 #Sets up variables
-five_character: str = input("Enter a five character word: ")
+five_character: str = input("Enter a 5-character word: ")
 single_character: str = input("Enter a single character: ")
 
 if(len(five_character) != 5):
