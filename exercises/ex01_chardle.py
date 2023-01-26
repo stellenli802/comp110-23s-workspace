@@ -7,11 +7,11 @@ five_character: str = input("Enter a 5-character word: ")
 single_character: str = input("Enter a single character: ")
 
 if (len(five_character) != 5):
-    sys.exit("Error: Word must contain 5 characters.")
     print("Error: Word must contain 5 characters.")
+    exit()
 elif (len(single_character) != 1):
-    print(exit)
-    raise SystemExit
+    print("Error: Character must be a single character.")
+    exit()
 print("Searching for " + single_character + " in " + five_character)
 
 index: int = 0
