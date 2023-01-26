@@ -1,7 +1,7 @@
 """EX01 - Chardle - A cute step toward Wordle."""
 
 __author__ = "730476572"
-import sys
+
 # Sets up variables
 five_character: str = input("Enter a 5-character word: ")
 single_character: str = input("Enter a single character: ")
