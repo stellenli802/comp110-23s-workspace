@@ -12,7 +12,7 @@ YELLOW_BOX: str = "\U0001F7E8"
 
 
 # while-loop to check for length of input
-while(len(guess) != len(secret)):
+while (len(guess) != len(secret)):
     new_guess = input(f"That was not { len(secret)} letters ! Try again: ")
     guess = new_guess
 
