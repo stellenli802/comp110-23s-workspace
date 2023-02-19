@@ -38,7 +38,7 @@ def emojified(guess: str, word: str) -> str:
     return results
 
 
-def input_guess(length:int) -> str: 
+def input_guess(length:int) -> str:
     """Function that makes sure user's input is correct length with the secret word."""
     guess = input(f"Enter a { length } character word: ")
     while (len(guess) != length):
@@ -56,7 +56,7 @@ def main() -> None:
     turns: int = 1
     word: str = "codes"
     while (turns <= max):
-        print(f"=== Turn { turns }/ { max } ===")
+        print(f"=== Turn { turns }/{ max } ===")
         # prompts input for the guess
         guess = input_guess(len(word))
         # results for that guess
@@ -64,7 +64,7 @@ def main() -> None:
         print(results)
         # terminate while loop if guessed correcrly
         if (results == len(word) * GREEN_BOX):
-            print(f"You won in { turns }/ { max } turns! ")
+            print(f"You won in { turns }/{ max } turns! ")
             max = 0
         else: 
             turns = turns + 1
