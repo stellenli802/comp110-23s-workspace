@@ -2,6 +2,7 @@
 
 __author__ = "730476572"
 
+
 def all(a: list[int], b: int) -> bool:
     """Returns True if all the ints in the list are same as the given int, False otherwise or if empty list."""
     ind: int = 0
