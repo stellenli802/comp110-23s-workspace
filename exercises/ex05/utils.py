@@ -3,15 +3,16 @@ __author__ = "730476572"
 
 
 def only_evens(a: list[int]) -> list[int]:
-    """Given a list of integers, return a list with only even values from that given list"""
+    """Given a list of integers, return a list with only even values from that given list."""
     output: list[int] = []
     for i in a:
         if i % 2 == 0:
             output.append(i)
     return output
 
+
 def concat(a: list[int], b: list[int]) -> list[int]:
-    """Given two lists of integers, return a list that contains all elements from both lists"""
+    """Given two lists of integers, return a list that contains all elements from both lists."""
     output: list[int] = []
     # append all elements from list 1 to the output list
     for i in a: 
@@ -21,7 +22,9 @@ def concat(a: list[int], b: list[int]) -> list[int]:
         output.append(i)
     return output
 
+
 def sub(list: list[int], start: int, end: int):
+    """Given a list, a start and end indices, generate a list that's a subset of the given list from the start index and end index - 1."""
     output: list[int] = []
     # return empty list if the length of the list is 0, 
     # start is greater than or equal to the length of the list, or end is at most 0
