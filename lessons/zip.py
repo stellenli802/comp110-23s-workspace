@@ -2,16 +2,14 @@
 
 __author__ = "730476572"
 
-def zip(a: list[str], b: list[int]) -> dict[str, int]:
+def zip(key: list[str], value: list[int]) -> dict[str, int]:
     """Return a dict with the keys in list a and values in list b."""
-    output: dict[str, int] = dict()
+    output: dict[str, int] = {}
     # return empty dict if input lists are different lengths or empty
-    if (len(a) == 0 and len(b) == 0):
-        return output
-    elif (len(a) != len(b)):
+    if (len(key) != len(value)):
         return output
     #  return a dict with keys in list a and values in list b
     else:
-        for i in len(a):
-            output = {a[i]: b[i]}
+        for i in range(len(key)):
+            output[key[i]] = value[i]
     return output
