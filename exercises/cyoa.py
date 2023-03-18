@@ -29,51 +29,51 @@ def greet() -> None:
 
 
 def computer() -> str:
-   """Function representing how the computer/opponent works."""
-   import random
-   global points_comp, comp_lives
-   comp_load: bool = False
-   comp_block: bool = False
-   comp_shoot: bool = False
-   comp_direct: bool = False
-   if (comp_lives != DEAD * 2 and player_lives != DEAD * 2): 
-       # generates a random int from 1 to 3 (included): 1 is load, 2 is block, 3 is shoot
-       num: int = random.randint(1, 3)
-       if (num == 1):
-          comp_load = True
-       elif (num == 2):
-          comp_block = True
-       elif (num == 3 and points_comp > 0):
-          comp_shoot = True
-       elif (num == 3 and points_comp == 0):
-          num = random.randint(1, 2)
-          if (num == 1):
-             comp_load = True
-          elif (num == 2):
-             comp_block = True
-       # when computer has 3 ammos, generates a random int from 1 to 4 (included) where 4 is dealing direct damage
-       if (points_comp >= 3):
-          num = random.randint(1, 4)
-          if (num == 1):
-             comp_load = True
-          if (num == 2):
-             comp_block = True
-          if (num == 3):
-             comp_shoot = True
-          if (num == 4):
-             comp_direct = True
-   comp_action: str = ""
-   if (comp_shoot == True):
-      comp_action = "shoot"
-      return(comp_action)
-   elif (comp_block == True):
-      comp_action = "block"
-      return(comp_action)
-   elif (comp_direct == True):
-      comp_action = "direct damage"
-   else:
-      comp_action = "load"
-   return(comp_action)
+    """Function representing how the computer/opponent works."""
+    import random
+    global points_comp, comp_lives
+    comp_load: bool = False
+    comp_block: bool = False
+    comp_shoot: bool = False
+    comp_direct: bool = False
+    if (comp_lives != DEAD * 2 and player_lives != DEAD * 2): 
+        # generates a random int from 1 to 3 (included): 1 is load, 2 is block, 3 is shoot
+        num: int = random.randint(1, 3)
+        if (num == 1):
+            comp_load = True
+        elif (num == 2):
+            comp_block = True
+        elif (num == 3 and points_comp > 0):
+            comp_shoot = True
+        elif (num == 3 and points_comp == 0):
+            num = random.randint(1, 2)
+            if (num == 1):
+                comp_load = True
+            elif (num == 2):
+                comp_block = True
+        # when computer has 3 ammos, generates a random int from 1 to 4 (included) where 4 is dealing direct damage
+        if (points_comp >= 3):
+            num = random.randint(1, 4)
+            if (num == 1):
+                comp_load = True
+            if (num == 2):
+                comp_block = True
+            if (num == 3):
+                comp_shoot = True
+            if (num == 4):
+                comp_direct = True
+    comp_action: str = ""
+    if (comp_shoot is True):
+        comp_action = "shoot"
+        return(comp_action)
+    elif (comp_block is True):
+        comp_action = "block"
+        return(comp_action)
+    elif (comp_direct is True):
+        comp_action = "direct damage"
+    else:
+        comp_action = "load"
+    return(comp_action)
    
 
 def game_procedure() -> None:
@@ -124,17 +124,17 @@ def game_procedure() -> None:
     elif (comp_action == "direct damage"):
         comp_direct = True
         direct_damage(points_comp)
-    if (player_shoot == True and comp_block == False):
+    if (player_shoot is True and comp_block is False):
         damage_comp += 1
-    elif (player_shoot == True and comp_block == True):
+    elif (player_shoot is True and comp_block is True):
         comp_block = False
     elif (player_direct == True):
         damage_comp += 1
-    if (comp_shoot == True and player_block == False):
+    if (comp_shoot is True and player_block is False):
         damage_player += 1
-    elif (comp_shoot == True and player_block == True):
+    elif (comp_shoot is True and player_block is True):
         player_block = False
-    elif (comp_direct == True):
+    elif (comp_direct is True):
        damage_player += 1
     if (damage_player == 2 or damage_comp == 2):
         player_lives = DEAD * 2
@@ -147,47 +147,46 @@ def game_procedure() -> None:
     print(f"You chose {action}, and the computer chose {comp_action}.")
        
 
-
 def lives() -> str:
     """Shows number of lives for you and the opponent."""
     global player_lives, comp_lives
     if (damage_player == 0):
-       player_lives = ALIVE * 2
+        player_lives = ALIVE * 2
     elif (damage_player == 1):
-       player_lives = ALIVE + DEAD
+        player_lives = ALIVE + DEAD
     elif (damage_player == 2):
-       player_lives = DEAD * 2
+        player_lives = DEAD * 2
     if (damage_comp == 0):
-       comp_lives = ALIVE * 2
+        comp_lives = ALIVE * 2
     elif (damage_comp == 1):
-       comp_lives = ALIVE + DEAD
+        comp_lives = ALIVE + DEAD
     elif (damage_comp == 2):
-       comp_lives = DEAD * 2
+        comp_lives = DEAD * 2
     lives: str = f"You now have {player_lives} remaining, and your opponent now has {comp_lives} remaining."
-    return(lives)
+    return (lives)
 
 
 def direct_damage(ammo: int) -> int:
     """A player can use 3 ammos to deal direct damage to the opponent and take one life from them (ignoring the block)."""
     global player_points, points_comp
     if (ammo >= 3):
-       ammo -= 3
-    return(ammo)
+        ammo -= 3
+    return (ammo)
 
 
 def main() -> None:
-  """main function for the game."""
-  greet()
-  while (player_lives != DEAD * 2 and comp_lives != DEAD * 2):
-     game_procedure()
-     computer()
-     print(lives())
-     if player_lives == DEAD * 2 and comp_lives == DEAD * 2:
-        print("It's a tie!")
-     elif player_lives == DEAD * 2:
-        print(f"Sorry {player}, you lost!")
-     elif comp_lives == DEAD * 2:
-        print(f"Congratulations {player}, you won!")
+    """Main function for the game."""
+    greet()
+    while (player_lives != DEAD * 2 and comp_lives != DEAD * 2):
+        game_procedure()
+        computer()
+        print(lives())
+        if player_lives == DEAD * 2 and comp_lives == DEAD * 2:
+            print("It's a tie!")
+        elif player_lives == DEAD * 2:
+            print(f"Sorry {player}, you lost!")
+        elif comp_lives == DEAD * 2:
+            print(f"Congratulations {player}, you won!")
 
 
 if __name__ == "__main__":
