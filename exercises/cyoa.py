@@ -13,7 +13,7 @@ comp_lives: str = ALIVE * 2
 damage_player: int = 0
 damage_comp: int = 0
 
-player: str = input("What is your name? ")
+player: str = ""
 
 # equivalent as amount of ammo
 player_points: int = 0
@@ -22,6 +22,8 @@ points_comp: int = 0
 
 def greet() -> None:
     """Greet function to introduce the game."""
+    global player
+    player = input("What is your name? ")
     print(f"Hi { player }, welcome to the 'Load, Shoot, Block' game.\n In each round, you will choose to load, shoot, or block, and you will go against a computer that chooses a random action.\n Both you and the computer will have 2 lives (represented by smiley face {ALIVE} and skull{DEAD}), and whoever loses both lives first loses the game.")
     print("Just like the meaning of those words, 'load' means loading an ammo; 'shoot' uses an ammo and damages the opponent; 'block' blocks a shot. The game ends in a tie if both players die at the same time.")
     print("You will also obtain the choice to deal direct damage when you have 3 or more ammos. A direct damage takes away one life and is unblockable.")
@@ -65,32 +67,30 @@ def computer() -> str:
     comp_action: str = ""
     if (comp_shoot is True):
         comp_action = "shoot"
-        return(comp_action)
+        return (comp_action)
     elif (comp_block is True):
         comp_action = "block"
-        return(comp_action)
+        return (comp_action)
     elif (comp_direct is True):
         comp_action = "direct damage"
-    else:
+    elif (comp_load is True):
         comp_action = "load"
-    return(comp_action)
+    return (comp_action)
    
 
 def game_procedure() -> None:
     """Procedures of the game."""
-    player_load: bool = False
+    global player_points, points_comp, damage_player, damage_comp, player_lives, comp_lives
     player_block: bool = False
     player_shoot: bool = False
     player_direct: bool = False
     comp_block: bool = False
     comp_shoot: bool = False
     comp_direct: bool = False
-    global player_points, points_comp, damage_player, damage_comp, player_lives, comp_lives
     # asks the player to load, block, shoot (only when ammo/player_points > 0), or direct damage (only when player_points/ammo >= 3)
     while True:
         action: str = input(f"{player}, please choose one from the following actions: load, shoot, block, or 'direct damage'. ")
         if action == "load":
-            player_load = True
             player_points += 1
             break
         elif action == "block":
@@ -128,14 +128,14 @@ def game_procedure() -> None:
         damage_comp += 1
     elif (player_shoot is True and comp_block is True):
         comp_block = False
-    elif (player_direct == True):
+    elif (player_direct is True):
         damage_comp += 1
     if (comp_shoot is True and player_block is False):
         damage_player += 1
     elif (comp_shoot is True and player_block is True):
         player_block = False
     elif (comp_direct is True):
-       damage_player += 1
+        damage_player += 1
     if (damage_player == 2 or damage_comp == 2):
         player_lives = DEAD * 2
         comp_lives = DEAD * 2
@@ -168,7 +168,6 @@ def lives() -> str:
 
 def direct_damage(ammo: int) -> int:
     """A player can use 3 ammos to deal direct damage to the opponent and take one life from them (ignoring the block)."""
-    global player_points, points_comp
     if (ammo >= 3):
         ammo -= 3
     return (ammo)
@@ -190,4 +189,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-  main()
+    main()
