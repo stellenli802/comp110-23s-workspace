@@ -16,7 +16,7 @@ damage_comp: int = 0
 player: str = ""
 
 # equivalent as amount of ammo
-player_points: int = 0
+points: int = 0
 points_comp: int = 0
 
 
@@ -80,35 +80,35 @@ def computer() -> str:
 
 def game_procedure() -> None:
     """Procedures of the game."""
-    global player_points, points_comp, damage_player, damage_comp, player_lives, comp_lives
+    global points, points_comp, damage_player, damage_comp, player_lives, comp_lives
     player_block: bool = False
     player_shoot: bool = False
     player_direct: bool = False
     comp_block: bool = False
     comp_shoot: bool = False
     comp_direct: bool = False
-    # asks the player to load, block, shoot (only when ammo/player_points > 0), or direct damage (only when player_points/ammo >= 3)
+    # asks the player to load, block, shoot (only when ammo/points > 0), or direct damage (only when points/ammo >= 3)
     while True:
         action: str = input(f"{player}, please choose one from the following actions: load, shoot, block, or 'direct damage'. ")
         if action == "load":
-            player_points += 1
+            points += 1
             break
         elif action == "block":
             player_block = True
             break
         elif action == "shoot":
-            if player_points == 0:
+            if points == 0:
                 print("You do not have any ammo. Please choose a different action.")
             else:
                 player_shoot = True
-                player_points -= 1
+                points -= 1
                 break
         elif action == "direct damage":
-            if player_points < 3:
+            if points < 3:
                 print("You do not have enough ammos for a direct damage. Please choose a different action.")
             else:
                 player_direct = True
-                direct_damage(player_points)
+                direct_damage(points)
                 break
         else:
             print("Please only type one of the following actions: 'load', 'shoot', 'block', or 'direct damage'. ")
@@ -143,7 +143,7 @@ def game_procedure() -> None:
         player_lives = ALIVE + DEAD
     elif (damage_comp == 1):
         comp_lives = ALIVE + DEAD
-    print(f"You have {player_points} ammo, and the computer has {points_comp} ammo.")
+    print(f"You have {points} ammo, and the computer has {points_comp} ammo.")
     print(f"You chose {action}, and the computer chose {comp_action}.")
        
 
