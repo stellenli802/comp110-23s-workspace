@@ -6,7 +6,6 @@ __author__ = "730476572"
 ALIVE: str = "\U0001f603"
 DEAD: str = "\U0001f480"
 
-
 player_lives: str = ALIVE * 2
 comp_lives: str = ALIVE * 2
 
@@ -81,6 +80,8 @@ def computer() -> str:
 def game_procedure() -> None:
     """Procedures of the game."""
     global points, points_comp, damage_player, damage_comp, player_lives, comp_lives
+    player_lives = ALIVE * 2
+    comp_lives = ALIVE * 2
     player_block: bool = False
     player_shoot: bool = False
     player_direct: bool = False
@@ -89,7 +90,7 @@ def game_procedure() -> None:
     comp_direct: bool = False
     # asks the player to load, block, shoot (only when ammo/points > 0), or direct damage (only when points/ammo >= 3)
     while True:
-        action: str = input(f"{player}, please choose one from the following actions: load, shoot, block, or 'direct damage'. ")
+        action: str = input(f"{player}, please choose one from the following actions: load, shoot, block, 'direct damage', or, if you don't want to play, press 'q'. ")
         if action == "load":
             points += 1
             break
@@ -110,6 +111,9 @@ def game_procedure() -> None:
                 player_direct = True
                 direct_damage(points)
                 break
+        elif action == "q":
+            print("Thanks for playing!")
+            quit()
         else:
             print("Please only type one of the following actions: 'load', 'shoot', 'block', or 'direct damage'. ")
     # consequence of shooting or dealing direct damage
@@ -173,20 +177,39 @@ def direct_damage(ammo: int) -> int:
     return (ammo)
 
 
+def reset_game() -> None:
+    """Resets the variables before each game."""
+    global player_lives, comp_lives, damage_player, damage_comp, points, points_comp
+    player_lives = ALIVE * 2
+    comp_lives = ALIVE * 2
+    damage_player = 0
+    damage_comp = 0
+    points = 0
+    points_comp = 0
+
+
 def main() -> None:
     """Main function for the game."""
-    greet()
-    while (player_lives != DEAD * 2 and comp_lives != DEAD * 2):
-        game_procedure()
-        computer()
-        print(lives())
-        if player_lives == DEAD * 2 and comp_lives == DEAD * 2:
-            print("It's a tie!")
-        elif player_lives == DEAD * 2:
-            print(f"Sorry {player}, you lost!")
-        elif comp_lives == DEAD * 2:
-            print(f"Congratulations {player}, you won!")
-
+    global points, points_comp
+    while True:
+        reset_game()
+        greet()
+        while (player_lives != DEAD * 2 and comp_lives != DEAD * 2):
+            game_procedure()
+            computer()
+            print(lives())
+            if player_lives == DEAD * 2 and comp_lives == DEAD * 2:
+                print("It's a tie!")
+            elif player_lives == DEAD * 2:
+                print(f"Sorry {player}, you lost!")
+            elif comp_lives == DEAD * 2:
+                print(f"Congratulations {player}, you won!")
+        again: str = input("Would you like to play again? (Y/N) ").lower()
+        if again == "n":
+            print("Thanks for playing!")
+            break
+        if again == "y":
+            continue
 
 if __name__ == "__main__":
     main()
