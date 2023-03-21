@@ -110,9 +110,10 @@ def game_procedure() -> None:
             else:
                 player_direct = True
                 direct_damage(points)
+                points -= 3
                 break
         elif action == "q":
-            print("Thanks for playing!")
+            print(f"Thanks for playing! You had { points } ammo(s).")
             quit()
         else:
             print("Please only type one of the following actions: 'load', 'shoot', 'block', or 'direct damage'. ")
@@ -174,6 +175,9 @@ def direct_damage(ammo: int) -> int:
     """A player can use 3 ammos to deal direct damage to the opponent and take one life from them (ignoring the block)."""
     if (ammo >= 3):
         ammo -= 3
+    confirm: str = input("Are you sure you want to deal direct damage? (Y/N) ").lower()
+    if (confirm == 'y'):
+        print(f"{ player }, you have chosen to deal direct damage. You now have { ammo } ammo(s) remaining.")
     return (ammo)
 
 
@@ -191,9 +195,9 @@ def reset_game() -> None:
 def main() -> None:
     """Main function for the game."""
     global points, points_comp
+    greet()
     while True:
         reset_game()
-        greet()
         while (player_lives != DEAD * 2 and comp_lives != DEAD * 2):
             game_procedure()
             computer()
