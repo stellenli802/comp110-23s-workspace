@@ -60,10 +60,10 @@ def main() -> None:
         # prompts input for the guess
         guess = input_guess(len(word))
         # results for that guess
-        results = emojified(guess, word)
-        print(results)
+        boxes = emojified(guess, word)
+        print(boxes)
         # terminate while loop if guessed correcrly
-        if (results == len(word) * GREEN_BOX):
+        if (boxes == len(word) * GREEN_BOX):
             print(f"You won in { turns }/{ max } turns! ")
             max = 0
         else: 
